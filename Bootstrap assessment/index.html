@@ -35,8 +35,8 @@
 
 <script>
 function calculateInterval() {
-    let startDate = new Date(document.getElementById("From").value);
-    let endDate = new Date(document.getElementById("To").value);
+    let From = new Date(document.getElementById("From").value);
+    let To = new Date(document.getElementById("To").value);
     
     if (isNaN(From) || isNaN(To)) {
         alert("Please select both dates.");
@@ -44,13 +44,13 @@ function calculateInterval() {
     }
 
     if (From > To) {
-        alert("To must be after From.");
+        alert("End date must be after start date.");
         return;
     }
 
-    let years = To.getFullYear() - sFrom.getFullYear();
+    let years = To.getFullYear() - From.getFullYear();
     let months = (years * 12) + (To.getMonth() - From.getMonth());
-    let days = Math.floor((To- From) / (1000 * 60 * 60 * 24));
+    let days = Math.floor((To - From) / (1000 * 60 * 60 * 24));
     let weeks = Math.floor(days / 7);
 
     document.getElementById("years").textContent = years;
