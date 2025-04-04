@@ -12,12 +12,12 @@
     <h2 class="mb-3">Date Interval Calculator</h2>
     <div class="row">
         <div class="col-md-4">
-            <label for="startDate" class="form-label">Start Date:</label>
-            <input type="date" id="startDate" class="form-control">
+            <label for="From" class="form-label">From:</label>
+            <input type="date" id="From" class="form-control">
         </div>
         <div class="col-md-4">
-            <label for="endDate" class="form-label">End Date:</label>
-            <input type="date" id="endDate" class="form-control">
+            <label for="To" class="form-label">To:</label>
+            <input type="date" id="To" class="form-control">
         </div>
         <div class="col-md-4 d-flex align-items-end">
             <button class="btn btn-primary w-100" onclick="calculateInterval()">Calculate Interval</button>
@@ -25,28 +25,38 @@
     </div>
 
     <div class="mt-3">
-        <h4>Result: <span id="result"></span></h4>
+        <h4>Result:</h4>
+        <p><strong>Years:</strong> <span id="years"></span></p>
+        <p><strong>Months:</strong> <span id="months"></span></p>
+        <p><strong>Weeks:</strong> <span id="weeks"></span></p>
+        <p><strong>Days:</strong> <span id="days"></span></p>
     </div>
 </div>
 
 <script>
 function calculateInterval() {
-    let startDate = new Date(document.getElementById("startDate").value);
-    let endDate = new Date(document.getElementById("endDate").value);
+    let startDate = new Date(document.getElementById("From").value);
+    let endDate = new Date(document.getElementById("To").value);
     
-    if (isNaN(startDate) || isNaN(endDate)) {
-        document.getElementById("result").textContent = "Please select both dates.";
+    if (isNaN(From) || isNaN(To)) {
+        alert("Please select both dates.");
         return;
     }
 
-    let timeDiff = endDate - startDate;
-    let dayDiff = timeDiff / (1000 * 60 * 60 * 24);
-
-    if (dayDiff < 0) {
-        document.getElementById("result").textContent = "End date must be after start date.";
-    } else {
-        document.getElementById("result").textContent = dayDiff + " days";
+    if (From > To) {
+        alert("To must be after From.");
+        return;
     }
+
+    let years = To.getFullYear() - sFrom.getFullYear();
+    let months = (years * 12) + (To.getMonth() - From.getMonth());
+    let days = Math.floor((To- From) / (1000 * 60 * 60 * 24));
+    let weeks = Math.floor(days / 7);
+
+    document.getElementById("years").textContent = years;
+    document.getElementById("months").textContent = months;
+    document.getElementById("weeks").textContent = weeks;
+    document.getElementById("days").textContent = days;
 }
 </script>
 
